@@ -47,6 +47,11 @@ public class LineageSettingsService extends LineageSystemService {
                     LineageSettings.Secure.DEVICE_HOSTNAME);
             if (hostname != null) {
                 SystemProperties.set("net.hostname", hostname);
+            } else {
+                String name = SystemProperties.get("ro.product.name");
+                if (name != null && name.length() > 0) {
+                    SystemProperties.set("net.hostname", name);
+                }
             }
         }
     }
